@@ -1,0 +1,48 @@
+evss-ngen-poc-service:
+  propSource: cloud
+  
+---
+
+spring:
+    profiles: local-int
+evss-ngen-poc-service:
+  env: local-int
+  
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  # enabling faster registration for this profile
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 10
+logging: 
+  level:
+    gov:
+      va:
+        wss.framework: info
+        evss.ngen: info
+        
+---
+
+spring:
+    profiles: docker-demo
+evss-ngen-poc-service:
+  env: docker-demo
+  
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://evss-ngen-poc-eurekaserver:8761/eureka/
+  # enabling faster registration for this profile
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 20
+logging: 
+  level:
+    gov:
+      va:
+        wss.framework: info
+        evss.ngen: info
